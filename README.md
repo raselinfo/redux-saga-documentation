@@ -29,8 +29,8 @@
 
 ### Websites
 
-<a href="https://redux.js.org/introduction/getting-started"> Redux </a>
-<a href="https://react-redux.js.org/introduction/getting-started"> React Redux </a>
+<a href="https://redux.js.org/introduction/getting-started"> Redux </a>,
+<a href="https://react-redux.js.org/introduction/getting-started"> React Redux </a>,
 <a href="https://redux-saga.js.org/docs/introduction/GettingStarted/"> Redux Saga </a>
 
 ### Setup
@@ -47,8 +47,8 @@ root.render(
 </Provider>
 );
 
-
 ### Action
+
 - Actions are the plain function
 - Get data from ReactJS
 - Send data to Reducer after process
@@ -56,7 +56,8 @@ root.render(
 - Must sync type with Reducer
 
 **The example of how action looks like**
-*action.js:*
+_action.js:_
+
 ```js
 export const ADD_TO_CART = (data) => {
   console.log("add to cart", data);
@@ -89,4 +90,53 @@ function App() {
 }
 
 export default App;
+```
+
+### Reducer
+
+- Reducer for handle data for redux store
+- Update data in store
+- Rules
+  - Need root Reducer
+  - Reducer must return some value
+  - Reducer must have some initial value
+
+**The example that how reducer looks like**
+<br/>
+_reducer.js_
+
+```js
+export const cartData = (payload = [], action) => {
+  // payload : data that are come from action
+  // action : action that are come from action with type property
+  if (action === "ADD_TO_CART") {
+    return payload;
+  }
+  return payload;
+};
+```
+
+**Root Reducer file combine all the reducer. And this Root Reducer is use in Redux Store**
+_rootReducer.js_
+
+```js
+import { combineReducers } from "redux";
+import { cartData } from "./reducer";
+
+export default combineReducers({
+  // Here all the reducer will past
+  cartData,
+});
+```
+
+**And finally in store.js the rootReducer will used**
+_store.js_
+
+```js
+import { createStore } from "redux";
+import rootReducer from "./rootReducer";
+
+const store = createStore(rootReducer);
+
+export default store;
 ```
