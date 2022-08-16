@@ -47,7 +47,6 @@ root.render(
 </Provider>
 );
 
-````
 
 ### Action
 - Actions are the plain function
@@ -66,7 +65,7 @@ export const ADD_TO_CART = (data) => {
     data,
   };
 };
-````
+```
 
 **The process that how we can call action from our React js**
 _app.js_
