@@ -1,21 +1,19 @@
-import { useEffect } from "react";
 import "./App.css";
-import axios from "axios";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./views/Home";
-import Login from "./views/Login";
-import Auth from "./views/Auth";
+import { ADD_TO_CART } from "./redux/actions";
+import { useDispatch } from "react-redux";
+
 function App() {
-
-
+  const dispatch = useDispatch();
+  const product = {
+    name: "T-Shirt",
+    price: "50",
+  };
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/auth" element={<Auth/>}/>
-      </Routes>
-    </BrowserRouter>
+    <div>
+     
+      <button onClick={() => dispatch(ADD_TO_CART(product))}>Click</button>
+      
+    </div>
   );
 }
 
