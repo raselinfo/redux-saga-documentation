@@ -36,16 +36,18 @@
 ### Setup
 
 <img src="./image/setup1.png">
-Provider : we need provide our application a provider with store
+**Provider : we need provide our application a provider with store**
+
 ```js
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
 root.render(
-<Provider store={store}>
-<App />
-</Provider>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
+```
 
 ### Action
 
@@ -102,17 +104,18 @@ export default App;
   - Reducer must have some initial value
 
 **The example that how reducer looks like**
-<br/>
 _reducer.js_
 
 ```js
-export const cartData = (payload = [], action) => {
-  // payload : data that are come from action
-  // action : action that are come from action with type property
-  if (action === "ADD_TO_CART") {
-    return payload;
+export const cartData = (initialValue = {}, action) => {
+  //action : it's stored action type and payload also
+  switch (action.type) {
+    case "ADD_TO_CART":
+      return [...initialValue, action.data];
+
+    default:
+      return initialValue;
   }
-  return payload;
 };
 ```
 
@@ -129,7 +132,7 @@ export default combineReducers({
 });
 ```
 
-**And finally in store.js the rootReducer will used**
+**And finally in store.js the rootReducer will be used**
 _store.js_
 
 ```js
@@ -139,4 +142,21 @@ import rootReducer from "./rootReducer";
 const store = createStore(rootReducer);
 
 export default store;
+```
+
+### useSelector
+
+**useSelector allow me to get data from store**
+**app.js**
+
+```js
+import { useSelector } from "react-redux";
+function App() {
+    
+  const products = useSelector((state) => state.cartData);
+
+return <div>{products.length || 0}</div>;
+}
+
+export default App;
 ```
