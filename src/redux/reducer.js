@@ -1,7 +1,9 @@
-export const cartData = (payload = [], action) => {
-  console.log("reducer is here", payload, action);
-  if (action === "ADD_TO_CART") {
-    return payload;
+export const cartData = (initialValue = [], action) => {
+  switch (action.type) {
+    case "ADD_TO_CART":
+      return [...initialValue, action.data];
+
+    default:
+      return initialValue;
   }
-  return payload;
 };
